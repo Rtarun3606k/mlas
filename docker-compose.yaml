@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  # Nginx web server
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80" # Map port 80 on the host to port 80 in the container
+    volumes:
+      - ./html:/usr/share/nginx/html # Mount the local html directory to the container
+
+  # Application service
+  app:
+    image: myapp:latest
+    build:
+      context: . # Use the current directory for the build context
+      dockerfile: Dockerfile # Specify the Dockerfile to use
+    ports:
+      - "5000:5000" # Map port 5000 on the host to port 5000 in the container
